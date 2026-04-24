@@ -465,11 +465,11 @@ const Home = () => {
 
             {/* RIGHT SIDE - IMAGE */}
             <div className="flex flex-col justify-center items-center md:justify-end "> {/*y-flip*/}
-              <img
+              {/* <img
                 className="w-72 md:w-96 lg:w-[420px] drop-shadow-xl rounded-md"
                 src="/sir.jpeg"
                 alt="Teacher"
-              />
+              /> */}
               <h1 className="text-center text-neutral-950 mt-4 text-md sm:text-2xl font-bold "> Mr. Shambhu Kumar Singh</h1>
               <p className="text-center text-green-950  text-sm sm:text-xl font-semibold bg-green-200 rounded-lg px-2 py-1 border border-green-600 "> Teaching Since 2017</p>
             </div>
