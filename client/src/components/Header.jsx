@@ -131,7 +131,7 @@ const Header = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-lg lg:text-xl font-bold bg-linear-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent tracking-tight">
-                  Mourya Accadmy
+                  Mumbai Public School
                 </span>
                 <span className="text-[10px] lg:text-xs text-slate-700 tracking-wider hidden sm:block">
                   Darbhanga
