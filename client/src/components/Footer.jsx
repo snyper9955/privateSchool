@@ -28,7 +28,7 @@ const Footer = () => {
                   <img src="/logo.jpeg" alt="" className='w-10 h-10 rounded-full' />
                 </div>
                 <span className="font-bold text-xl sm:text-2xl text-white tracking-tight">
-                  Mourya Accadmy
+                  Mumbai Public School
                 </span>
               </div>
 
@@ -99,7 +99,7 @@ const Footer = () => {
                 </li>
                 <li className="flex gap-3">
                   <MapPin className="w-4 h-4 text-emerald-400" />
-                  <span>Mourya Accadmy, Darbhanga, Bihar 846001</span>
+                  <span>Mumbai Public School, Darbhanga, Bihar 846001</span>
                 </li>
                 <li className="flex gap-3">
 +              <Link
@@ -119,7 +119,7 @@ const Footer = () => {
           <div className="pt-6 border-t border-gray-800 flex flex-col items-center">
             <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
               <p className="text-xs text-gray-500">
-                © {currentYear} Mourya Accadmy Darbhanga • Built for Success
+                © {currentYear} Mumbai Public School Darbhanga • Built for Success
               </p>
        
             </div>

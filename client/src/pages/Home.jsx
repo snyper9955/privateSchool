@@ -30,6 +30,8 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -43,6 +45,22 @@ const Home = () => {
   const [loadingToppers, setLoadingToppers] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  const heroImages = [
+    "/school_bg_1.png",
+    "/school_bg_2.png",
+    "/school_bg_3.png"
+  ];
+
+  useEffect(() => {
+    if (isAutoPlaying) {
+      const timer = setInterval(() => {
+        setHeroIndex((prev) => (prev + 1) % heroImages.length);
+      }, 5000);
+      return () => clearInterval(timer);
+    }
+  }, [isAutoPlaying]);
   
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
@@ -401,45 +419,69 @@ const Home = () => {
 
 
       {/* Hero Intro Section */}
-      <section className="relative max-w-7xl mx-auto w-full bg-white overflow-hidden">
-        <div className="absolute   top-0 right-0 w-96 h-96 bg-emerald-100/20 rounded-full blur-3xl -mr-48 -mt-48" />
+      <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        {/* Background Image Slideshow */}
+        <div className="absolute inset-0 z-0">
+          <AnimatePresence initial={false}>
+            <motion.img
+              key={heroIndex}
+              src={heroImages[heroIndex]}
+              alt="University Campus"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ 
+                duration: 1, 
+                ease: [0.4, 0, 0.2, 1] // Custom cubic-bezier for smooth slide
+              }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70 z-10" />
+          
+          {/* Slide Indicators */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+            {heroImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  setHeroIndex(idx);
+                  setIsAutoPlaying(false);
+                  setTimeout(() => setIsAutoPlaying(true), 10000); // Resume autoplay after 10s
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === heroIndex ? "w-8 bg-emerald-500" : "w-2 bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
 
-        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 w-full">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             {/* LEFT SIDE - TEXT */}
             <div className="text-center md:text-left">
-              <div className="flex flex-col sm:flex-row gap-4">
-                {/* <button
-                  onClick={() => navigate("/courses")}
-                  className="bg-neutral-900 text-white px-8 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md"
-                >
-                  Explore Courses <ArrowRight className="w-4 h-4" />
-                </button> */}
-
-               
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
                  <Link
                   to="/toppers"
-                  className="bg-neutral-900 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-neutral-800 transition-colors shadow-sm"
+                  className="bg-white text-neutral-900 px-8 py-3.5 rounded-xl font-semibold hover:bg-neutral-100 transition-colors shadow-lg"
                 >
                   View All Topers
                 </Link>
                  <Link
                   to="tel:+918809193796"
-                  className="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-sm hover:shadow-md"
+                  className="bg-emerald-600 text-white px-8 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-emerald-700 transition-all shadow-lg hover:shadow-emerald-500/20"
                 >
                   <Phone className="w-4 h-4" /> call us
                 </Link>
-
-               
               </div>
-           
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight mt-2">
-                Mourya Academy {" "}
-                <span className="text-emerald-600 relative inline-block">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mt-2">
+                Mumbai Public School {" "}
+                <span className="text-emerald-400 relative inline-block">
                   Best
                   <svg
-                    className="absolute -bottom-2 left-0 w-full h-2 text-emerald-600/30"
+                    className="absolute -bottom-2 left-0 w-full h-2 text-emerald-400/50"
                     viewBox="0 0 100 8"
                     preserveAspectRatio="none"
                   >
@@ -455,23 +497,23 @@ const Home = () => {
                 Coaching Institute in Darbhanga
               </h1>
 
-              <p className="text-[14px] text-center sm:text-xl text-green-950 max-w-xl mt-4  leading-relaxed font-semibold bg-green-100 rounded-full px-1 py-1 border border-green-600 ">
-                <span className="text-green-950 ">📍</span>
-              Located near Shivdhara Chowk, Darbhanga,Bihar
+              <p className="text-[14px] text-center sm:text-xl text-white max-w-xl mt-6 leading-relaxed font-semibold bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20">
+                <span className="text-emerald-400">📍</span>
+                Located near Shivdhara Chowk, Darbhanga, Bihar
               </p>
-              <h2 className='text-center text-pink-950 mt-4 text-md sm:text-2xl font-semibold bg-pink-200 rounded-full px-1 py-1 border border-pink-600 '> All courses available for CBSE VI to XII</h2>
+              <h2 className='text-center text-white mt-4 text-md sm:text-2xl font-semibold bg-pink-600/20 backdrop-blur-md rounded-full px-4 py-2 border border-pink-500/30'> All courses available for CBSE VI to XII</h2>
             
             </div>
 
             {/* RIGHT SIDE - IMAGE */}
-            <div className="flex flex-col justify-center items-center md:justify-end "> {/*y-flip*/}
-              {/* <img
-                className="w-72 md:w-96 lg:w-[420px] drop-shadow-xl rounded-md"
-                src="/sir.jpeg"
-                alt="Teacher"
-              /> */}
-              <h1 className="text-center text-neutral-950 mt-4 text-md sm:text-2xl font-bold "> Mr. Shambhu Kumar Singh</h1>
-              <p className="text-center text-green-950  text-sm sm:text-xl font-semibold bg-green-200 rounded-lg px-2 py-1 border border-green-600 "> Teaching Since 2017</p>
+            <div className="flex flex-col justify-center items-center md:items-end">
+              <div className="bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-2xl">
+                <h1 className="text-center text-white text-xl sm:text-3xl font-bold">Mr. Shambhu Kumar Singh</h1>
+                <p className="text-center text-emerald-300 text-sm sm:text-xl font-semibold mt-2">Teaching Since 2017</p>
+                <div className="mt-4 flex justify-center">
+                   <div className="h-1 w-20 bg-emerald-500 rounded-full" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

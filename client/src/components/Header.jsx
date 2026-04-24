@@ -126,7 +126,7 @@ const Header = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-linear-to-r from-green-600 to-green-800 rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
                 <div className="relative w-9 h-9 lg:w-11 lg:h-11 bg-linear-to-br from-green-600 via-green-600 to-green-700 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 group-hover:scale-105 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-green-500/30">
-                <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-cover rounded-xl" />
+                <img src="https://imgs.search.brave.com/Y2zfxDJsPu--f1N5_N3uA0cyumAyIhL42s6Zulc_d2c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZmF2cG5nLmNvbS8x/My84LzIxL3N0LXhh/dmllci1zLWNvbGxl/Z2lhdGUtc2Nob29s/LXN0LXhhdmllci1z/LXVuaXZlcnNpdHkt/a29sa2F0YS1zdC14/YXZpZXItcy1jb2xs/ZWdlLWtvbGthdGEt/c3QteGF2aWVyLXMt/Y29sbGVnZS1tdW1i/YWktcHJlc2lkZW5j/eS11bml2ZXJzaXR5/LWtvbGthdGEtcG5n/LWZhdnBuZy0zMnNV/M2VrM2dQaU13amFh/Y1FSWkRyaDE4X3Qu/anBn" alt="Logo" className="w-full h-full object-cover rounded-xl" />
                 </div>
               </div>
               <div className="flex flex-col">
